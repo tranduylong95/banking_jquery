@@ -1,0 +1,173 @@
+{
+  "customers": [
+    {
+      "fullName": "NVA1",
+      "email": "Long@gmail.com`1",
+      "phone": "07745456971",
+      "address": "s1111",
+      "balance": 229,
+      "deleted": 0,
+      "id": 1
+    },
+    {
+      "fullName": "11",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 2
+    },
+    {
+      "fullName": "",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 3
+    },
+    {
+      "fullName": "NVA",
+      "email": "Long@gmail.com",
+      "phone": "1",
+      "address": "2",
+      "balance": 0,
+      "deleted": 0,
+      "id": 4
+    },
+    {
+      "fullName": "Trần Duy Long",
+      "email": "tranduylong95@gmail.com",
+      "address": "123",
+      "phone": "123",
+      "balance": 0,
+      "deleted": 0,
+      "id": 5
+    },
+    {
+      "fullName": "Trần Duy Long",
+      "email": "tranduylong95@gmail.com",
+      "address": "123",
+      "phone": "123",
+      "balance": 0,
+      "deleted": 0,
+      "id": 6
+    },
+    {
+      "fullName": "",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 7
+    },
+    {
+      "fullName": "",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 8
+    },
+    {
+      "fullName": "1",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 9
+    },
+    {
+      "fullName": "",
+      "email": "",
+      "address": "",
+      "phone": "",
+      "balance": 0,
+      "deleted": 0,
+      "id": 10
+    }
+  ],
+  "deposits": [
+    {
+      "transactionAmount": 20,
+      "customerId": "1",
+      "id": 1
+    },
+    {
+      "transactionAmount": 200,
+      "customerId": "1",
+      "id": 2
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": "1",
+      "id": 3
+    },
+    {
+      "transactionAmount": 29,
+      "customerId": "1",
+      "id": 4
+    }
+  ],
+  "withdraws": [
+    {
+      "transactionAmount": 0,
+      "customerId": null,
+      "id": 1
+    },
+    {
+      "transactionAmount": 0,
+      "customerId": null,
+      "id": 2
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 3
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 4
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 5
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 6
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 7
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 8
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": null,
+      "id": 9
+    },
+    {
+      "transactionAmount": 29,
+      "customerId": null,
+      "id": 10
+    },
+    {
+      "transactionAmount": 20,
+      "customerId": "1",
+      "id": 11
+    }
+  ]
+}

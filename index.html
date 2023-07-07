@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of customers</title>
+    <link rel="stylesheet" href="assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fontawesome/v5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="col-lg-6">
+                <h1>List of customers</h1>
+            </div>
+            <div class="col-lg-6 header-right-button">
+                <a href="#">
+                    <button class="btn btn-outline-light">
+                        <i class="fas fa-history"></i>
+                        Transfer histories
+                    </button>
+                </a>
+                <a>
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#formCreate">
+                        <i class="fas fa-user-plus"></i>
+                        Add new customer
+                    </button>
+                </a>
+            </div>
+        </header>
+        <div class="content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Balance</th>
+                        <th colspan="4">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-customer">
+                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<div class="modal fade modal-xl" id="formCreate" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Create Customer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form >
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Full Name</label>
+                        <input type="text" class="form-control" name="fullName">
+                        <div class="errors"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="email" class="form-control" name="email">
+                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Phone</label>
+                        <input type="tel" class="form-control" name="phone" >
+                     
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Address</label>
+                        <input type="text" class="form-control" name="address">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline-primary" id="butCreate">
+                <i class="fas fa-plus"></i>
+                Create
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade modal-xl" id="formEdit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Edit Customer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form  >
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Full Name</label>
+                        <input type="text" class="form-control" name="fullName">
+                        <div class="errors"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="email" class="form-control" name="email" >  
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Phone</label>
+                        <input type="tel" class="form-control" name="phone" >
+                     
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Address</label>
+                        <input type="text" class="form-control" name="address">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary" id="butUpdate" data-id="0">
+                <i class="fas fa-plus"></i>
+                Update
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade modal-xl" id="formDeposit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Deposit</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form  >
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Full Name</label>
+                        <input type="text" class="form-control" name="fullName">
+                        <div class="errors"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="email" class="form-control" name="email">
+                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Current balance ($)</label>
+                        <input type="tel" class="form-control" name="balance">
+                     
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Transaction Amount ($)</label>
+                        <input type="text" class="form-control" name="transactionAmount">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary" id="butDeposit">
+                <i class="fas fa-plus"></i>
+                Deposit
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade modal-xl" id="formWithDraws" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">With Draw</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form  >
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Full Name</label>
+                        <input type="text" class="form-control" name="fullName">
+                        <div class="errors"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="email" class="form-control" name="email">
+                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Current balance ($)</label>
+                        <input type="tel" class="form-control" name="balance">
+                     
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Transaction Amount ($)</label>
+                        <input type="text" class="form-control" name="transactionAmount">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary" id="buttWithDraw">
+                <i class="fas fa-plus"></i>
+                WithDraw
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade modal-xl" id="formWithTransfer" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Create Customer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form  >
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Full Name</label>
+                        <input type="text" class="form-control">
+                        <div class="errors"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="email" class="form-control" >
+                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Phone</label>
+                        <input type="tel" class="form-control" name="phone" >
+                     
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="fw-bold">Address</label>
+                        <input type="text" class="form-control" name="address">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-plus"></i>
+                Create
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+</html>
+<script>
+const API_Customer="http://localhost:3300/customers";
+const API_Deposit="http://localhost:3300/deposits";
+const API_WITHDRAW="http://localhost:3300/withdraws";
+const CREATE_BUT = document.getElementById('butCreate');
+const UPDATE_BUT = document.getElementById('butUpdate');
+const DEPOSIT_BUT=document.getElementById('butDeposit');
+const WITHDRAW_BUT=document.getElementById('buttWithDraw');
+
+WITHDRAW_BUT.addEventListener('click',(event)=>{
+    let formWithDraw=document.getElementById("formWithDraws");
+    var id= event.target.getAttribute('data-id');
+    var balance=+formWithDraw.querySelector('input[name="balance"]').value;
+    var transactionAmount=+formWithDraw.querySelector('input[name="transactionAmount"]').value;
+    var newBalanceCurrent=balance-transactionAmount;
+    console.log(newBalanceCurrent);
+    fetch(API_Customer + '/'+id,{
+        method:'PATCH',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({ balance: newBalanceCurrent })
+    }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
+    fetch(API_WITHDRAW,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
+    })
+});
+
+DEPOSIT_BUT.addEventListener('click',(event)=>{
+    let formDeposit=document.getElementById("formDeposit");
+    var id= event.target.getAttribute('data-id');
+    var balance=+formDeposit.querySelector('input[name="balance"]').value;
+    var transactionAmount=+formDeposit.querySelector('input[name="transactionAmount"]').value;
+    var newBalanceCurrent=balance+transactionAmount;
+    fetch(API_Customer + '/'+id,{
+        method:'PATCH',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({ balance: newBalanceCurrent })
+    }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
+    fetch(API_Deposit,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
+    })
+});
+
+CREATE_BUT.addEventListener('click',(event)=>{
+    event.preventDefault();
+    let formCreate=document.getElementById("formCreate");
+    var fullName=formCreate.querySelector('input[name="fullName"]').value;
+    var email=formCreate.querySelector('input[name="email"]').value;
+    var address=formCreate.querySelector('input[name="address"]').value;
+    var phone=formCreate.querySelector('input[name="phone"]').value;
+    var customer=new Customer(fullName,email,address,phone);
+    fetch(API_Customer,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(customer)})
+        .then(response =>  {
+        if (!response.ok) {
+            throw new Error('Lỗi khi gửi yêu cầu POST');
+        }
+        return response.json();
+        }).then(data => {
+            var tableContent=document.getElementById('table-customer');
+            var firstChild = tableContent.firstChild;
+            tableContent.insertAdjacentHTML('afterbegin', renderCustomer(data));
+        })
+        .catch(error => {
+            console.error('Lỗi khi gửi yêu cầu POST:', error);
+        });
+})
+
+UPDATE_BUT.addEventListener('click',(event)=>{
+    let formEdit=document.getElementById("formEdit");
+    var fullName=formEdit.querySelector('input[name="fullName"]').value;
+    var email=formEdit.querySelector('input[name="email"]').value;
+    var address=formEdit.querySelector('input[name="address"]').value;
+    var phone=formEdit.querySelector('input[name="phone"]').value;
+    var id= event.target.getAttribute('data-id');
+    fetch(API_Customer + '/'+id,{
+        method:'PATCH',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({fullName:fullName,email:email,address:address,phone:phone})})
+        .then(response =>  {
+        if (!response.ok) {
+            throw new Error('Lỗi khi gửi yêu cầu PUT');
+        }
+        return response.json();
+        }).then(data => {
+            var trTableAfter=document.getElementById('tr-'+id);
+            var tempDiv = document.createElement('table');
+            tempDiv.innerHTML=renderCustomer(data);
+            var trTableBefore= tempDiv.querySelector('tr');
+            var tableContent=document.getElementById('table-customer');
+            tableContent.replaceChild(trTableBefore,trTableAfter);
+            addEventListenerButtonInTableCustomer();
+            closeModal(formEdit);
+        })
+        .catch(error => {
+            console.error('Lỗi khi gửi yêu cầu POST:', error);
+        });
+})
+
+
+showCustomer();
+
+function Customer(fullName,email,address,phone,balance,deleted,id){
+    this.fullName=fullName;
+    this.email=email;
+    this.address=address;
+    this.phone=phone;
+    this.balance=balance || 0;
+    this.deleted=deleted || 0;
+    this.id=id||null;
+}
+
+function addEventListenerButtonInTableCustomer(){
+    const EDIT_BUT=document.getElementsByClassName('edit');
+        Array.from(EDIT_BUT).forEach((button) => {
+            const handleEditButtonClick = function(event) {
+                    event.preventDefault();
+                    const modalEdit = new bootstrap.Modal(document.getElementById('formEdit'), {
+                    keyboard: false
+                    });
+                    modalEdit.show();
+                    const id = this.getAttribute('data-id');
+                    showEditCustomer(id);
+                };
+            button.removeEventListener('click', handleEditButtonClick);
+            button.addEventListener('click',handleEditButtonClick);
+        });
+    const DEPOSIT_BUT=document.getElementsByClassName('deposit');
+    Array.from(DEPOSIT_BUT).forEach((button) => {
+            const handleEditButtonClick = function(event) {
+                    event.preventDefault();
+                    const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
+                    keyboard: false
+                    });
+                    modalEdit.show();
+                    const id = this.getAttribute('data-id');
+                    fetch(API_Customer+'/'+id)
+                    .then(response=>response.json())
+                        .then(data=>{
+                            let formEdit=document.getElementById("formWithDraws");
+                            formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+                            formEdit.querySelector('input[name="email"]').value=data.email;
+                            formEdit.querySelector('input[name="balance"]').value=data.balance;
+                            document.getElementById("butDeposit").setAttribute("data-id",data.id);
+                        })
+                        .catch(error =>console.log(error));
+                            };
+            button.removeEventListener('click', handleEditButtonClick);
+            button.addEventListener('click',handleEditButtonClick);
+        });
+    const WITHDRAW_BUT=document.getElementsByClassName('withdraw');
+    Array.from(WITHDRAW_BUT).forEach((button) => {
+        const handleEditButtonClick = function(event) {
+                event.preventDefault();
+                const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
+                keyboard: false
+                });
+                modalEdit.show();
+                const id = this.getAttribute('data-id');
+                fetch(API_Customer+'/'+id)
+                .then(response=>response.json())
+                    .then(data=>{
+                        let formEdit=document.getElementById("formWithDraws");
+                        formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+                        formEdit.querySelector('input[name="email"]').value=data.email;
+                        formEdit.querySelector('input[name="balance"]').value=data.balance;
+                        document.getElementById("buttWithDraw").sextAttribute("data-id",data.id);
+                    })
+                    .catch(error =>console.log(error));
+                        };
+        button.removeEventListener('click', handleEditButtonClick);
+        button.addEventListener('click',handleEditButtonClick);
+    });
+}
+
+function renderCustomer(item){  
+    return `<tr id=tr-${item.id}>
+                <td class="text-center">${item.id}</td>
+                <td>${item.fullName}</td>
+                <td class="text-center">${item.email}</td>
+                <td class="text-center">${item.phone}</td>
+                <td>${item.address}</td>
+                <td  class="text-end num-space">${item.balance}</td>
+                <td>
+                    <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-success deposit"  data-id=${item.id}>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary">
+                            <i class="fas fa-minus"></i>
+                    </button>
+                </td>
+            </tr>`;
+}
+
+function showCustomer(){
+    fetch(API_Customer).then(res => res.json()).then(data=>{
+        var tableContent=document.getElementById('table-customer');
+        data.forEach(item => {
+            tableContent.innerHTML+=renderCustomer(item);
+        });
+        addEventListenerButtonInTableCustomer();
+    })
+}
+
+function showEditCustomer(id){
+    fetch(API_Customer+'/'+id)
+        .then(response=>response.json())
+            .then(data=>{
+                let formEdit=document.getElementById("formEdit");
+                formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+                formEdit.querySelector('input[name="email"]').value=data.email;
+                formEdit.querySelector('input[name="address"]').value=data.address;
+                formEdit.querySelector('input[name="phone"]').value=data.phone;
+                document.getElementById("butUpdate").setAttribute("data-id",data.id);
+            })
+            .catch(error =>console.log(error));
+}
+
+function closeModal(element){
+            const modalElement = element;
+            // Loại bỏ lớp CSS "show" để đóng modal
+            modalElement.classList.remove("show");
+            modalElement.setAttribute("aria-hidden", "true");
+            modalElement.style.display = "none";
+            document.body.classList.remove("modal-open");
+            const modalBackdrop = document.querySelector(".modal-backdrop");
+            modalBackdrop.remove();
+}
+
+showCustomer();
+function renderCustomer(item){
+    return `<tr id=tr-${item.id}>
+                <td class="text-center">${item.id}</td>
+                <td>${item.fullName}</td>
+                <td class="text-center">${item.email}</td>
+                <td class="text-center">${item.phone}</td>
+                <td>${item.address}</td>
+                <td  class="text-end num-space">${item.balance}</td>
+                <td>
+                    <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-success deposit"  data-id=${item.id}>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary">
+                            <i class="fas fa-minus"></i>
+                    </button>
+                </td>
+            </tr>`;
+}
+
+// function showCustomer(){
+//     $.ajax({
+//         method:'GET',
+//         url:API_Customer,
+//     })
+//     .done(data=>{
+//         $('')
+//     })
+//     .fail(error=>console.log(error));
+// }
+</script>
