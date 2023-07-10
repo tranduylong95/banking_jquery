@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -23,7 +24,7 @@
                     </button>
                 </a>
                 <a>
-                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#formCreate">
+                    <button class="btn btn-outline-light" id="butCreateShow">
                         <i class="fas fa-user-plus"></i>
                         Add new customer
                     </button>
@@ -50,7 +51,7 @@
         </div>
     </div>
 </body>
-<div class="modal fade modal-xl" id="formCreate" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade modal-xl" id="modalCreate" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -58,7 +59,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form >
+            <form id="frmCreate">
                 <div class="row mb-3">
                     <div class="col-lg-6">
                         <label class="fw-bold">Full Name</label>
@@ -89,11 +90,11 @@
                 <i class="fas fa-plus"></i>
                 Create
             </button>
-        </div>
+        </div>x
       </div>
     </div>
 </div>
-<div class="modal fade modal-xl" id="formEdit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade modal-xl" id="modalEdit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -101,7 +102,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form  >
+            <form  id="frmEdit">
                 <div class="row mb-3">
                     <div class="col-lg-6">
                         <label class="fw-bold">Full Name</label>
@@ -135,7 +136,7 @@
       </div>
     </div>
 </div>
-<div class="modal fade modal-xl" id="formDeposit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade modal-xl" id="modalDeposit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -143,7 +144,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form  >
+            <form id="frmDeposit"  >
                 <div class="row mb-3">
                     <div class="col-lg-6">
                         <label class="fw-bold">Full Name</label>
@@ -164,7 +165,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label class="fw-bold">Transaction Amount ($)</label>
-                        <input type="text" class="form-control" name="transactionAmount">
+                        <input type="text" class="form-control" name="transactionAmount" value="0">
                     </div>
                 </div>
             </form>
@@ -178,7 +179,7 @@
       </div>
     </div>
 </div>
-<div class="modal fade modal-xl" id="formWithDraws" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade modal-xl" id="modalWithDraws" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -186,7 +187,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form  >
+            <form  id="frmWithDraw">
                 <div class="row mb-3">
                     <div class="col-lg-6">
                         <label class="fw-bold">Full Name</label>
@@ -207,7 +208,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label class="fw-bold">Transaction Amount ($)</label>
-                        <input type="text" class="form-control" name="transactionAmount">
+                        <input type="text" class="form-control" name="transactionAmount" value="0">
                     </div>
                 </div>
             </form>
@@ -221,170 +222,70 @@
       </div>
     </div>
 </div>
-<div class="modal fade modal-xl" id="formWithTransfer" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade modal-xl" id="modalTransfer" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Create Customer</h5>
+          <h5 class="modal-title" id="exampleModalToggleLabel">Transfer</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form  >
+            <form id="frmTransfer">
                 <div class="row mb-3">
-                    <div class="col-lg-6">
-                        <label class="fw-bold">Full Name</label>
-                        <input type="text" class="form-control">
-                        <div class="errors"></div>
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Sender ID</label>
+                        <input type="number"  class="form-control"  name="senderId" readonly>
                     </div>
-                    <div class="col-lg-6">
-                        <label class="fw-bold">Email</label>
-                        <input type="email" class="form-control" >
-                        
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Sender Name</label>
+                        <input type="text" class="form-control" name="senderFullName" readonly>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Email </label>
+                        <input type="email" class="form-control" name="senderEmail" readonly>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Sender balance ($)</label>
+                        <input type="tel"  class="form-control" name="senderBalance" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-lg-6">
-                        <label class="fw-bold">Phone</label>
-                        <input type="tel" class="form-control" name="phone" >
-                     
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Recipient Name</label>
+                        <select class="form-select" name="recipientId">
+                            
+                        </select>
+                        <div id="transfer-name-error" style="color: red;" ></div>
                     </div>
-                    <div class="col-lg-6">
-                        <label class="fw-bold">Address</label>
-                        <input type="text" class="form-control" name="address">
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Transfer amount</label>
+                        <input type="text" name="transferAmount" class="form-control"  onkeyup="handleTotalAmountTransaction(this)" >
+                        <div id="transfer-error" style="color: red;" ></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Fees (%)</label>
+                        <input type="tel" name="fees"  class="form-control" value="10" readonly>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="fw-bold">Total amount of transaction ($)</label>
+                        <input type="tel" name="transactionAmount" id="transactionAmount" class="form-control" readonly>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-primary">
+            <button  class="btn btn-outline-primary" id="butTransfer">
                 <i class="fas fa-plus"></i>
-                Create
+                Transfer
             </button>
         </div>
       </div>
     </div>
 </div>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const API_Customer="http://localhost:3300/customers";
-const API_Deposit="http://localhost:3300/deposits";
-const API_WITHDRAW="http://localhost:3300/withdraws";
-const CREATE_BUT = document.getElementById('butCreate');
-const UPDATE_BUT = document.getElementById('butUpdate');
-const DEPOSIT_BUT=document.getElementById('butDeposit');
-const WITHDRAW_BUT=document.getElementById('buttWithDraw');
-
-WITHDRAW_BUT.addEventListener('click',(event)=>{
-    let formWithDraw=document.getElementById("formWithDraws");
-    var id= event.target.getAttribute('data-id');
-    var balance=+formWithDraw.querySelector('input[name="balance"]').value;
-    var transactionAmount=+formWithDraw.querySelector('input[name="transactionAmount"]').value;
-    var newBalanceCurrent=balance-transactionAmount;
-    console.log(newBalanceCurrent);
-    fetch(API_Customer + '/'+id,{
-        method:'PATCH',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({ balance: newBalanceCurrent })
-    }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
-    fetch(API_WITHDRAW,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
-    })
-});
-
-DEPOSIT_BUT.addEventListener('click',(event)=>{
-    let formDeposit=document.getElementById("formDeposit");
-    var id= event.target.getAttribute('data-id');
-    var balance=+formDeposit.querySelector('input[name="balance"]').value;
-    var transactionAmount=+formDeposit.querySelector('input[name="transactionAmount"]').value;
-    var newBalanceCurrent=balance+transactionAmount;
-    fetch(API_Customer + '/'+id,{
-        method:'PATCH',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({ balance: newBalanceCurrent })
-    }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
-    fetch(API_Deposit,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
-    })
-});
-
-CREATE_BUT.addEventListener('click',(event)=>{
-    event.preventDefault();
-    let formCreate=document.getElementById("formCreate");
-    var fullName=formCreate.querySelector('input[name="fullName"]').value;
-    var email=formCreate.querySelector('input[name="email"]').value;
-    var address=formCreate.querySelector('input[name="address"]').value;
-    var phone=formCreate.querySelector('input[name="phone"]').value;
-    var customer=new Customer(fullName,email,address,phone);
-    fetch(API_Customer,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify(customer)})
-        .then(response =>  {
-        if (!response.ok) {
-            throw new Error('Lỗi khi gửi yêu cầu POST');
-        }
-        return response.json();
-        }).then(data => {
-            var tableContent=document.getElementById('table-customer');
-            var firstChild = tableContent.firstChild;
-            tableContent.insertAdjacentHTML('afterbegin', renderCustomer(data));
-        })
-        .catch(error => {
-            console.error('Lỗi khi gửi yêu cầu POST:', error);
-        });
-})
-
-UPDATE_BUT.addEventListener('click',(event)=>{
-    let formEdit=document.getElementById("formEdit");
-    var fullName=formEdit.querySelector('input[name="fullName"]').value;
-    var email=formEdit.querySelector('input[name="email"]').value;
-    var address=formEdit.querySelector('input[name="address"]').value;
-    var phone=formEdit.querySelector('input[name="phone"]').value;
-    var id= event.target.getAttribute('data-id');
-    fetch(API_Customer + '/'+id,{
-        method:'PATCH',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({fullName:fullName,email:email,address:address,phone:phone})})
-        .then(response =>  {
-        if (!response.ok) {
-            throw new Error('Lỗi khi gửi yêu cầu PUT');
-        }
-        return response.json();
-        }).then(data => {
-            var trTableAfter=document.getElementById('tr-'+id);
-            var tempDiv = document.createElement('table');
-            tempDiv.innerHTML=renderCustomer(data);
-            var trTableBefore= tempDiv.querySelector('tr');
-            var tableContent=document.getElementById('table-customer');
-            tableContent.replaceChild(trTableBefore,trTableAfter);
-            addEventListenerButtonInTableCustomer();
-            closeModal(formEdit);
-        })
-        .catch(error => {
-            console.error('Lỗi khi gửi yêu cầu POST:', error);
-        });
-})
-
-
-showCustomer();
-
-function Customer(fullName,email,address,phone,balance,deleted,id){
+   function Customer(fullName,email,address,phone,balance,deleted,id){
     this.fullName=fullName;
     this.email=email;
     this.address=address;
@@ -392,172 +293,740 @@ function Customer(fullName,email,address,phone,balance,deleted,id){
     this.balance=balance || 0;
     this.deleted=deleted || 0;
     this.id=id||null;
-}
+    }
 
-function addEventListenerButtonInTableCustomer(){
-    const EDIT_BUT=document.getElementsByClassName('edit');
-        Array.from(EDIT_BUT).forEach((button) => {
-            const handleEditButtonClick = function(event) {
+    const page ={
+        component:{
+                element:{
+                  tbodyTableCustumer:$('#table-customer'),
+                  buttom:{
+                    create:$('#butCreateShow'),
+                    createSubmit:$('#butCreate'),
+                    edit:$('.edit'),
+                    update:$('#butUpdate'),
+                    deposit:$('.deposit'),
+                    depositSubmit:$('#butDeposit'),
+                    withdraw:$('.withdraw'),
+                    withdrawSubmit:$('#buttWithDraw'),
+                    transfer:$('.transfer'),
+                    transferSubmit:$('#butTransfer')
+                  },
+                  modal:{
+                    create:$('#modalCreate'),
+                    edit:$('#modalEdit'),
+                    deposit:$('#modalDeposit'),
+                    withdraw:$('#modalWithDraws'),
+                    transfer:$('#modalTransfer'),
+                  },
+                  form:{
+                    frmCreate:$('#frmCreate'),
+                    frmEdit:$('#frmEdit'),
+                    frmDeposit:$('#frmDeposit'),
+                    frmWithDraw:$('#frmWithDraw'),
+                    frmTransfer:$('#frmTransfer')
+                  },
+                  alert:{
+                    success:(title)=>{
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: title,
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
+                    }
+                  }
+                },
+
+                render:{
+                    showTableContentTrCustumerHTML: (item) => {
+                        return `<tr id=tr-${item.id}>
+                            <td class="text-center">${item.id}</td>
+                            <td>${item.fullName}</td>
+                            <td class="text-center">${item.email}</td>
+                            <td class="text-center">${item.phone}</td>
+                            <td>${item.address}</td>
+                            <td  class="text-end num-space">${item.balance}</td>
+                            <td>
+                                <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-success deposit"  data-id=${item.id}>
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                </a>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                </a>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary transfer" data-id=${item.id}>
+                                        <i class="fas fa-minus"></i>
+                                </button>
+                            </td>
+                    </tr>`;
+                    },
+                    showOptionRecipient:(item)=>{
+                        return `<option value="${item.id}">${item.fullName}</option>`;
+                    }
+                }
+            ,
+        },
+        apiList: Object.freeze({
+            API_CUSTOMER: 'http://localhost:3300/customers',
+            API_DEPOSIT:'http://localhost:3300/deposits',
+            API_WITHDRAW:'http://localhost:3300/withdraws',
+            API_TRANSFER:'http://localhost:3300/transfer',
+        }),
+        eventHandlerPage:{
+            buttonCreateShow: ()=>{
+                    page.component.element.buttom.create.on('click',()=>{   
+                    page.component.element.modal.create.modal('show');
+                    page.eventHandlerPage.buttonCreate();
+                })
+            },
+
+            buttonCreate:()=>{
+                page.component.element.buttom.createSubmit.off('click');
+                page.component.element.buttom.createSubmit.on('click',(event)=>{
                     event.preventDefault();
-                    const modalEdit = new bootstrap.Modal(document.getElementById('formEdit'), {
-                    keyboard: false
-                    });
-                    modalEdit.show();
-                    const id = this.getAttribute('data-id');
-                    showEditCustomer(id);
-                };
-            button.removeEventListener('click', handleEditButtonClick);
-            button.addEventListener('click',handleEditButtonClick);
-        });
-    const DEPOSIT_BUT=document.getElementsByClassName('deposit');
-    Array.from(DEPOSIT_BUT).forEach((button) => {
-            const handleEditButtonClick = function(event) {
-                    event.preventDefault();
-                    const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
-                    keyboard: false
-                    });
-                    modalEdit.show();
-                    const id = this.getAttribute('data-id');
-                    fetch(API_Customer+'/'+id)
-                    .then(response=>response.json())
-                        .then(data=>{
-                            let formEdit=document.getElementById("formWithDraws");
-                            formEdit.querySelector('input[name="fullName"]').value=data.fullName;
-                            formEdit.querySelector('input[name="email"]').value=data.email;
-                            formEdit.querySelector('input[name="balance"]').value=data.balance;
-                            document.getElementById("butDeposit").setAttribute("data-id",data.id);
-                        })
-                        .catch(error =>console.log(error));
-                            };
-            button.removeEventListener('click', handleEditButtonClick);
-            button.addEventListener('click',handleEditButtonClick);
-        });
-    const WITHDRAW_BUT=document.getElementsByClassName('withdraw');
-    Array.from(WITHDRAW_BUT).forEach((button) => {
-        const handleEditButtonClick = function(event) {
-                event.preventDefault();
-                const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
-                keyboard: false
-                });
-                modalEdit.show();
-                const id = this.getAttribute('data-id');
-                fetch(API_Customer+'/'+id)
-                .then(response=>response.json())
-                    .then(data=>{
-                        let formEdit=document.getElementById("formWithDraws");
-                        formEdit.querySelector('input[name="fullName"]').value=data.fullName;
-                        formEdit.querySelector('input[name="email"]').value=data.email;
-                        formEdit.querySelector('input[name="balance"]').value=data.balance;
-                        document.getElementById("buttWithDraw").sextAttribute("data-id",data.id);
+                    var fullName=page.component.element.form.frmCreate.find('input[name="fullName"]').val();
+                    var email=page.component.element.form.frmCreate.find('input[name="email"]').val();
+                    var phone=page.component.element.form.frmCreate.find('input[name="phone"]').val();
+                    var address=page.component.element.form.frmCreate.find('input[name="address"]').val();
+
+                    var customer =new Customer(fullName,email,phone,address);
+                    page.callAPI.createCustomer(customer).done( data =>{
+                         page.component.element.tbodyTableCustumer.prepend(page.component.render.showTableContentTrCustumerHTML(data));
+                         page.component.element.form.frmCreate[0].reset();
+                         
+                         page.component.element.alert.success("Thêm mới thành công");
+
+                         page.eventHandlerPage.buttomEditShow();
+                         page.eventHandlerPage.buttomDepositShow();   
+                         page.eventHandlerPage.buttomWithDrawShow();
+                         page.eventHandlerPage.buttomTransferShow(); 
+                    }).
+                    fail({
+
                     })
-                    .catch(error =>console.log(error));
-                        };
-        button.removeEventListener('click', handleEditButtonClick);
-        button.addEventListener('click',handleEditButtonClick);
-    });
-}
+                })
+              
+            },
 
-function renderCustomer(item){  
-    return `<tr id=tr-${item.id}>
-                <td class="text-center">${item.id}</td>
-                <td>${item.fullName}</td>
-                <td class="text-center">${item.email}</td>
-                <td class="text-center">${item.phone}</td>
-                <td>${item.address}</td>
-                <td  class="text-end num-space">${item.balance}</td>
-                <td>
-                    <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-outline-success deposit"  data-id=${item.id}>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    </a>
-                </td>
-                <td>
-                    <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    </a>
-                </td>
-                <td>
-                    <button class="btn btn-outline-primary">
-                            <i class="fas fa-minus"></i>
-                    </button>
-                </td>
-            </tr>`;
-}
+            buttomEditShow:()=>{
+                page.component.element.buttom.edit=$('.edit');
+                page.component.element.buttom.edit.off('click');
+                page.component.element.buttom.edit.on('click',function(){
+                    page.component.element.modal.edit.modal('show');
+                    var id=$(this).data('id');
+                    page.callAPI.getCustomerById(id).done(data=>{
+                        page.component.element.form.frmEdit.find('input[name="fullName"]').val(data.fullName);
+                        page.component.element.form.frmEdit.find('input[name="email"]').val(data.email);
+                        page.component.element.form.frmEdit.find('input[name="phone"]').val(data.phone);
+                        page.component.element.form.frmEdit.find('input[name="address"]').val(data.address);
+                        
+                        page.eventHandlerPage.buttomUpdate(data);
+                        
+                    });
+                })
+            },
 
-function showCustomer(){
-    fetch(API_Customer).then(res => res.json()).then(data=>{
-        var tableContent=document.getElementById('table-customer');
-        data.forEach(item => {
-            tableContent.innerHTML+=renderCustomer(item);
-        });
-        addEventListenerButtonInTableCustomer();
-    })
-}
+            buttomUpdate:(customer)=>{
+                page.component.element.buttom.update.off('click');
+                page.component.element.buttom.update.on('click',(event)=>{
+                    event.preventDefault();
+                    customer.fullName = page.component.element.form.frmEdit.find('input[name="fullName"]').val();
+                    customer.email =  page.component.element.form.frmEdit.find('input[name="email"]').val();
+                    customer.phone =  page.component.element.form.frmEdit.find('input[name="phone"]').val();
+                    customer.address = page.component.element.form.frmEdit.find('input[name="address"]').val();
+                    
+                    page.callAPI.updateCutomer(customer).then(data=>{   
+                        
+                        page.component.element.modal.edit.modal('hide');
+                        page.component.element.tbodyTableCustumer.find('#tr-'+customer.id).replaceWith(page.component.render
+                        .showTableContentTrCustumerHTML(data));
 
-function showEditCustomer(id){
-    fetch(API_Customer+'/'+id)
-        .then(response=>response.json())
-            .then(data=>{
-                let formEdit=document.getElementById("formEdit");
-                formEdit.querySelector('input[name="fullName"]').value=data.fullName;
-                formEdit.querySelector('input[name="email"]').value=data.email;
-                formEdit.querySelector('input[name="address"]').value=data.address;
-                formEdit.querySelector('input[name="phone"]').value=data.phone;
-                document.getElementById("butUpdate").setAttribute("data-id",data.id);
-            })
-            .catch(error =>console.log(error));
-}
+                        page.eventHandlerPage.buttomEditShow();
+                        page.eventHandlerPage.buttomDepositShow();
+                        page.eventHandlerPage.buttomWithDrawShow();
+                        page.eventHandlerPage.buttomTransferShow(); 
+                        
+                    }).catch(error=>{
 
-function closeModal(element){
-            const modalElement = element;
-            // Loại bỏ lớp CSS "show" để đóng modal
-            modalElement.classList.remove("show");
-            modalElement.setAttribute("aria-hidden", "true");
-            modalElement.style.display = "none";
-            document.body.classList.remove("modal-open");
-            const modalBackdrop = document.querySelector(".modal-backdrop");
-            modalBackdrop.remove();
-}
+                    })
+                })
+            },
 
-showCustomer();
-function renderCustomer(item){
-    return `<tr id=tr-${item.id}>
-                <td class="text-center">${item.id}</td>
-                <td>${item.fullName}</td>
-                <td class="text-center">${item.email}</td>
-                <td class="text-center">${item.phone}</td>
-                <td>${item.address}</td>
-                <td  class="text-end num-space">${item.balance}</td>
-                <td>
-                    <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
-                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-outline-success deposit"  data-id=${item.id}>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    </a>
-                </td>
-                <td>
-                    <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    </a>
-                </td>
-                <td>
-                    <button class="btn btn-outline-primary">
-                            <i class="fas fa-minus"></i>
-                    </button>
-                </td>
-            </tr>`;
-}
+            buttomDepositShow:()=>{
+                page.component.element.buttom.deposit=$('.deposit');
+
+                page.component.element.buttom.deposit.off('click');
+                page.component.element.buttom.deposit.on('click',function(){
+                    page.component.element.modal.deposit.modal('show');
+                    var id=$(this).data('id');
+                    page.callAPI.getCustomerById(id).done(data=>{
+                        page.component.element.form.frmDeposit.find('input[name="fullName"]').val(data.fullName);
+                        page.component.element.form.frmDeposit.find('input[name="email"]').val(data.email);
+                        page.component.element.form.frmDeposit.find('input[name="balance"]').val(data.balance);
+                        
+                        page.eventHandlerPage.buttomDeposit(data);
+                        
+                    })
+                })
+            },
+            buttomDeposit:(customer)=>{
+                    page.component.element.buttom.depositSubmit.off('click');
+                    page.component.element.buttom.depositSubmit.on('click',(event)=>{
+
+                        var transactionAmount=+page.component.element.form.frmDeposit.find('input[name="transactionAmount"]').val();
+                        var newBalanceCurrent=transactionAmount+customer.balance;
+                        customer.balance=newBalanceCurrent;
+                        const deposit={
+                           'transactionAmount':transactionAmount,
+                            'customer_id':customer.id
+                        }
+                        page.callAPI.createDeposit(deposit);
+                        page.callAPI.updateCutomer(customer).then(data=>{
+                            page.component.element.modal.deposit.modal('hide');
+                           
+                            page.component.element.tbodyTableCustumer.find('#tr-'+customer.id).replaceWith(page.component.render
+                            .showTableContentTrCustumerHTML(data));
+
+                            page.component.element.alert.success('Gởi tiền thành công');
+
+                            page.component.element.form.frmDeposit.find('input[name="balance"]').val(data.balance);
+                            
+                            page.eventHandlerPage.buttomEditShow();
+                            page.eventHandlerPage.buttomDepositShow();
+                            page.eventHandlerPage.buttomWithDrawShow();
+                            page.eventHandlerPage.buttomTransferShow();
+                        })
+
+
+                    })
+                  
+            },
+            buttomWithDrawShow:()=>{
+                page.component.element.buttom.withdraw=$('.withdraw');
+
+                page.component.element.buttom.withdraw.off('click');
+                page.component.element.buttom.withdraw.on('click',function(){
+                    page.component.element.modal.withdraw.modal('show');
+                    var id=$(this).data('id');
+                    page.callAPI.getCustomerById(id).done(data=>{
+
+                        page.component.element.form.frmWithDraw.find('input[name="fullName"]').val(data.fullName);
+                        page.component.element.form.frmWithDraw.find('input[name="email"]').val(data.email);
+                        page.component.element.form.frmWithDraw.find('input[name="balance"]').val(data.balance);
+                        
+                        page.eventHandlerPage.buttomWithDraw(data);
+                        
+                    })
+                })
+            },
+
+            buttomWithDraw:(customer)=>{
+
+                    page.component.element.buttom.withdrawSubmit.off('click');
+                    page.component.element.buttom.withdrawSubmit.on('click',(event)=>{
+
+                    var transactionAmount=+page.component.element.form.frmWithDraw.find('input[name="transactionAmount"]').val();
+                    var newBalanceCurrent=customer.balance-transactionAmount;
+                    customer.balance=newBalanceCurrent;
+                    const withdraw={
+                        'transactionAmount':transactionAmount,
+                        'customer_id':customer.id
+                    }
+                    page.callAPI.createWithDraw(withdraw);
+                    page.callAPI.updateCutomer(customer).then(data=>{
+                        page.component.element.modal.withdraw.modal('hide');
+
+                        page.component.element.alert.success('Rút tiền  thành công');
+
+                        page.component.element.tbodyTableCustumer.find('#tr-'+customer.id).replaceWith(page.component.render
+                        .showTableContentTrCustumerHTML(data));
+                        page.component.element.alert.success('Rút tiền thành công');
+                        page.component.element.form.frmDeposit.find('input[name="balance"]').val(data.balance);
+                        
+                        page.eventHandlerPage.buttomEditShow();
+                        page.eventHandlerPage.buttomDepositShow();
+                        page.eventHandlerPage.buttomWithDrawShow();
+                        page.eventHandlerPage.buttomTransferShow();
+                    })
+                    
+
+                })
+            },
+
+            buttomTransferShow:()=>{
+
+                page.component.element.buttom.transfer=$('.transfer');
+               
+                page.component.element.buttom.transfer.off('click');
+                page.component.element.buttom.transfer.on('click',function(){
+                    page.component.element.modal.transfer.modal('show');
+                    var id=$(this).data('id');
+                    page.callAPI.getCustomerById(id).done(data=>{
+
+                    page.component.element.form.frmTransfer.find('input[name="senderId"]').val(data.id);
+                    page.component.element.form.frmTransfer.find('input[name="senderFullName"]').val(data.fullName);
+                    page.component.element.form.frmTransfer.find('input[name="senderEmail"]').val(data.email);
+                    page.component.element.form.frmTransfer.find('input[name="senderBalance"]').val(data.balance);
+
+                    page.callAPI.getCustomerNotById(id).done(data=>{
+                            $.each(data, function(_,item) {
+                                page.component.element.form.frmTransfer.find('select[name="recipientId"]').append(page.component.render.showOptionRecipient(item));
+                            });
+                        });
+
+                    })
+                    
+                    page.eventHandlerPage.buttomTransfer();
+                })
+            },
+
+           buttomTransfer:()=>{
+                page.component.element.buttom.transferSubmit.off('click');
+                page.component.element.buttom.transferSubmit.on('click',()=>{
+                    page.component.element.modal.transfer.modal('hide');
+
+                    var senderId = page.component.element.form.frmTransfer.find('input[name="senderId"]').val();
+                    var recipientId=page.component.element.form.frmTransfer.find('select[name="recipientId"]').val();
+                    var fees = +page.component.element.form.frmTransfer.find('input[name="fees"]').val();
+                    var transferAmount=+page.component.element.form.frmTransfer.find('input[name="transferAmount"]').val();
+                    var transactionAmount=+page.component.element.form.frmTransfer.find('input[name="transactionAmount"]').val();
+                    var feesAmount=transactionAmount-transferAmount;
+
+                    const transfer={
+                        'senderId':senderId,
+                        'recipientId':recipientId,
+                        'fees':fees,
+                        'transferAmount':transferAmount,
+                        'transactionAmount':transactionAmount,
+                        'feesAmount':feesAmount,
+                    };
+
+                    page.callAPI.createTransfer(transfer).then(data=>{
+                        page.component.element.alert.success("Chuyển tiền thành công");
+                        page.callAPI.getCustomerById(senderId).done(data=>{
+                            data.balance=data.balance-transactionAmount;
+                            page.callAPI.updateCutomer(data).done(data=>{
+                                page.component.element.tbodyTableCustumer.find('#tr-'+data.id).replaceWith(page.component.render
+                                .showTableContentTrCustumerHTML(data));
+                            }).catch({
+
+                            });
+                        });
+                        page.callAPI.getCustomerById(recipientId).done(data=>{
+                            data.balance=data.balance+transferAmount;
+                            page.callAPI.updateCutomer(data).done(data=>{
+                            page.component.element.tbodyTableCustumer.find('#tr-'+data.id).replaceWith(page.component.render
+                            .showTableContentTrCustumerHTML(data));
+                            });
+                        });
+                        }).catch({});
+                });
+                       
+
+                    page.eventHandlerPage.buttomEditShow();
+                    page.eventHandlerPage.buttomDepositShow();
+                    page.eventHandlerPage.buttomWithDrawShow();
+                    page.eventHandlerPage.buttomTransferShow(); 
+               
+           }
+        },
+        
+        callAPI:{
+            getCustomer:()=>{
+                $.ajax({
+                    method:'GET',
+                    url:page.apiList.API_CUSTOMER,
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                }).done(data =>{
+                    $.each(data, function(_,item) {
+                       page.component.element.tbodyTableCustumer.append(page.component.render.showTableContentTrCustumerHTML(item));
+                       
+                       page.eventHandlerPage.buttomEditShow();
+                       page.eventHandlerPage.buttomDepositShow(); 
+                       page.eventHandlerPage.buttomWithDrawShow(); 
+                       page.eventHandlerPage.buttomTransferShow();
+                    });
+                }).fail({
+                    
+                })
+            },
+
+            createCustomer:(data)=>{
+                return $.ajax({
+                    method:'POST',
+                    url:page.apiList.API_CUSTOMER,
+                    data:JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+            },
+
+            getCustomerById:(id)=>{
+                return  $.ajax({
+                    method:'GET',
+                    url:page.apiList.API_CUSTOMER+'/'+id,
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                })
+            },
+            getCustomerNotById:(id)=>{
+                return  $.ajax({
+                    method:'GET',
+                    url:page.apiList.API_CUSTOMER+'?id_ne='+id,
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                })
+            },
+            updateCutomer:(data)=>{
+                return  $.ajax({
+                    method:'PATCH',
+                    url:page.apiList.API_CUSTOMER+'/'+data.id,
+                    data:JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                })
+            },
+            createDeposit:(data)=>{
+                return $.ajax({
+                    method:'POST',
+                    url:page.apiList.API_DEPOSIT,
+                    data:JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+            },
+
+            createWithDraw:(data)=>{
+                return $.ajax({
+                    method:'POST',
+                    url:page.apiList.API_WITHDRAW,
+                    data:JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+            },
+            createTransfer:(data)=>{
+                return $.ajax({
+                    method:'POST',
+                    url:page.apiList.API_TRANSFER,
+                    data:JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+            }
+
+        },
+        loadData:()=>{
+            page.callAPI.getCustomer();
+            page.eventHandlerPage.buttonCreateShow();
+        },
+    }
+    $(()=>{
+        page.loadData();
+    }) 
+// const API_Customer="http://localhost:3300/customers";
+// const API_Deposit="http://localhost:3300/deposits";
+// const API_WITHDRAW="http://localhost:3300/withdraws";
+// const CREATE_BUT = document.getElementById('butCreate');
+// const UPDATE_BUT = document.getElementById('butUpdate');
+// const DEPOSIT_BUT=document.getElementById('butDeposit');
+// const WITHDRAW_BUT=document.getElementById('buttWithDraw');
+
+// WITHDRAW_BUT.addEventListener('click',(event)=>{
+//     let formWithDraw=document.getElementById("formWithDraws");
+//     var id= event.target.getAttribute('data-id');
+//     var balance=+formWithDraw.querySelector('input[name="balance"]').value;
+//     var transactionAmount=+formWithDraw.querySelector('input[name="transactionAmount"]').value;
+//     var newBalanceCurrent=balance-transactionAmount;
+//     console.log(newBalanceCurrent);
+//     fetch(API_Customer + '/'+id,{
+//         method:'PATCH',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({ balance: newBalanceCurrent })
+//     }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
+//     fetch(API_WITHDRAW,{
+//         method:'POST',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
+//     })
+// });
+
+// DEPOSIT_BUT.addEventListener('click',(event)=>{
+//     let formDeposit=document.getElementById("formDeposit");
+//     var id= event.target.getAttribute('data-id');
+//     var balance=+formDeposit.querySelector('input[name="balance"]').value;
+//     var transactionAmount=+formDeposit.querySelector('input[name="transactionAmount"]').value;
+//     var newBalanceCurrent=balance+transactionAmount;
+//     fetch(API_Customer + '/'+id,{
+//         method:'PATCH',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({ balance: newBalanceCurrent })
+//     }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
+//     fetch(API_Deposit,{
+//         method:'POST',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({ transactionAmount: transactionAmount,customerId :id })
+//     })
+// });
+
+// CREATE_BUT.addEventListener('click',(event)=>{
+//     event.preventDefault();
+//     let formCreate=document.getElementById("formCreate");
+//     var fullName=formCreate.querySelector('input[name="fullName"]').value;
+//     var email=formCreate.querySelector('input[name="email"]').value;
+//     var address=formCreate.querySelector('input[name="address"]').value;
+//     var phone=formCreate.querySelector('input[name="phone"]').value;
+//     var customer=new Customer(fullName,email,address,phone);
+//     fetch(API_Customer,{
+//         method:'POST',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify(customer)})
+//         .then(response =>  {
+//         if (!response.ok) {
+//             throw new Error('Lỗi khi gửi yêu cầu POST');
+//         }
+//         return response.json();
+//         }).then(data => {
+//             var tableContent=document.getElementById('table-customer');
+//             var firstChild = tableContent.firstChild;
+//             tableContent.insertAdjacentHTML('afterbegin', renderCustomer(data));
+//         })
+//         .catch(error => {
+//             console.error('Lỗi khi gửi yêu cầu POST:', error);
+//         });
+// })
+
+// UPDATE_BUT.addEventListener('click',(event)=>{
+//     let formEdit=document.getElementById("formEdit");
+//     var fullName=formEdit.querySelector('input[name="fullName"]').value;
+//     var email=formEdit.querySelector('input[name="email"]').value;
+//     var address=formEdit.querySelector('input[name="address"]').value;
+//     var phone=formEdit.querySelector('input[name="phone"]').value;
+//     var id= event.target.getAttribute('data-id');
+//     fetch(API_Customer + '/'+id,{
+//         method:'PATCH',
+//         headers:{
+//             'Content-Type':'application/json'
+//         },
+//         body: JSON.stringify({fullName:fullName,email:email,address:address,phone:phone})})
+//         .then(response =>  {
+//         if (!response.ok) {
+//             throw new Error('Lỗi khi gửi yêu cầu PUT');
+//         }
+//         return response.json();
+//         }).then(data => {
+//             var trTableAfter=document.getElementById('tr-'+id);
+//             var tempDiv = document.createElement('table');
+//             tempDiv.innerHTML=renderCustomer(data);
+//             var trTableBefore= tempDiv.querySelector('tr');
+//             var tableContent=document.getElementById('table-customer');
+//             tableContent.replaceChild(trTableBefore,trTableAfter);
+//             addEventListenerButtonInTableCustomer();
+//             closeModal(formEdit);
+//         })
+//         .catch(error => {
+//             console.error('Lỗi khi gửi yêu cầu POST:', error);
+//         });
+// })
+
+
+// showCustomer();
+
+
+
+// function addEventListenerButtonInTableCustomer(){
+//     const EDIT_BUT=document.getElementsByClassName('edit');
+//         Array.from(EDIT_BUT).forEach((button) => {
+//             const handleEditButtonClick = function(event) {
+//                     event.preventDefault();
+//                     const modalEdit = new bootstrap.Modal(document.getElementById('formEdit'), {
+//                     keyboard: false
+//                     });
+//                     modalEdit.show();
+//                     const id = this.getAttribute('data-id');
+//                     showEditCustomer(id);
+//                 };
+//             button.removeEventListener('click', handleEditButtonClick);
+//             button.addEventListener('click',handleEditButtonClick);
+//         });
+//     const DEPOSIT_BUT=document.getElementsByClassName('deposit');
+//     Array.from(DEPOSIT_BUT).forEach((button) => {
+//             const handleEditButtonClick = function(event) {
+//                     event.preventDefault();
+//                     const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
+//                     keyboard: false
+//                     });
+//                     modalEdit.show();
+//                     const id = this.getAttribute('data-id');
+//                     fetch(API_Customer+'/'+id)
+//                     .then(response=>response.json())
+//                         .then(data=>{
+//                             let formEdit=document.getElementById("formWithDraws");
+//                             formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+//                             formEdit.querySelector('input[name="email"]').value=data.email;
+//                             formEdit.querySelector('input[name="balance"]').value=data.balance;
+//                             document.getElementById("butDeposit").setAttribute("data-id",data.id);
+//                         })
+//                         .catch(error =>console.log(error));
+//                             };
+//             button.removeEventListener('click', handleEditButtonClick);
+//             button.addEventListener('click',handleEditButtonClick);
+//         });
+//     const WITHDRAW_BUT=document.getElementsByClassName('withdraw');
+//     Array.from(WITHDRAW_BUT).forEach((button) => {
+//         const handleEditButtonClick = function(event) {
+//                 event.preventDefault();
+//                 const modalEdit = new bootstrap.Modal(document.getElementById('formWithDraws'), {
+//                 keyboard: false
+//                 });
+//                 modalEdit.show();
+//                 const id = this.getAttribute('data-id');
+//                 fetch(API_Customer+'/'+id)
+//                 .then(response=>response.json())
+//                     .then(data=>{
+//                         let formEdit=document.getElementById("formWithDraws");
+//                         formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+//                         formEdit.querySelector('input[name="email"]').value=data.email;
+//                         formEdit.querySelector('input[name="balance"]').value=data.balance;
+//                         document.getElementById("buttWithDraw").sextAttribute("data-id",data.id);
+//                     })
+//                     .catch(error =>console.log(error));
+//                         };
+//         button.removeEventListener('click', handleEditButtonClick);
+//         button.addEventListener('click',handleEditButtonClick);
+//     });
+// }
+
+// function renderCustomer(item){  
+//     return `<tr id=tr-${item.id}>
+//                 <td class="text-center">${item.id}</td>
+//                 <td>${item.fullName}</td>
+//                 <td class="text-center">${item.email}</td>
+//                 <td class="text-center">${item.phone}</td>
+//                 <td>${item.address}</td>
+//                 <td  class="text-end num-space">${item.balance}</td>
+//                 <td>
+//                     <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
+//                         <i class="fas fa-pencil-alt"></i>
+//                     </button>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-success deposit"  data-id=${item.id}>
+//                         <i class="fas fa-plus"></i>
+//                     </button>
+//                     </a>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
+//                         <i class="fas fa-minus"></i>
+//                     </button>
+//                     </a>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-primary">
+//                             <i class="fas fa-minus"></i>
+//                     </button>
+//                 </td>
+//             </tr>`;
+// }
+
+// function showCustomer(){
+//     fetch(API_Customer).then(res => res.json()).then(data=>{
+//         var tableContent=document.getElementById('table-customer');
+//         data.forEach(item => {
+//             tableContent.innerHTML+=renderCustomer(item);
+//         });
+//         addEventListenerButtonInTableCustomer();
+//     })
+// }
+
+// function showEditCustomer(id){
+//     fetch(API_Customer+'/'+id)
+//         .then(response=>response.json())
+//             .then(data=>{
+//                 let formEdit=document.getElementById("formEdit");
+//                 formEdit.querySelector('input[name="fullName"]').value=data.fullName;
+//                 formEdit.querySelector('input[name="email"]').value=data.email;
+//                 formEdit.querySelector('input[name="address"]').value=data.address;
+//                 formEdit.querySelector('input[name="phone"]').value=data.phone;
+//                 document.getElementById("butUpdate").setAttribute("data-id",data.id);
+//             })
+//             .catch(error =>console.log(error));
+// }
+
+// function closeModal(element){
+//             const modalElement = element;
+//             // Loại bỏ lớp CSS "show" để đóng modal
+//             modalElement.classList.remove("show");
+//             modalElement.setAttribute("aria-hidden", "true");
+//             modalElement.style.display = "none";
+//             document.body.classList.remove("modal-open");
+//             const modalBackdrop = document.querySelector(".modal-backdrop");
+//             modalBackdrop.remove();
+// }
+
+// function renderCustomer(item){
+//     return `<tr id=tr-${item.id}>
+//                 <td class="text-center">${item.id}</td>
+//                 <td>${item.fullName}</td>
+//                 <td class="text-center">${item.email}</td>
+//                 <td class="text-center">${item.phone}</td>
+//                 <td>${item.address}</td>
+//                 <td  class="text-end num-space">${item.balance}</td>
+//                 <td>
+//                     <button class="btn btn-outline-secondary edit"  data-id=${item.id}>
+//                         <i class="fas fa-pencil-alt"></i>
+//                     </button>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-success deposit"  data-id=${item.id}>
+//                         <i class="fas fa-plus"></i>
+//                     </button>
+//                     </a>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-warning withdraw" data-id=${item.id} >
+//                         <i class="fas fa-minus"></i>
+//                     </button>
+//                     </a>
+//                 </td>
+//                 <td>
+//                     <button class="btn btn-outline-primary">
+//                             <i class="fas fa-minus"></i>
+//                     </button>
+//                 </td>
+//             </tr>`;
+// }
 
 // function showCustomer(){
 //     $.ajax({
@@ -569,4 +1038,10 @@ function renderCustomer(item){
 //     })
 //     .fail(error=>console.log(error));
 // }
+function handleTotalAmountTransaction(element) {
+        let transferAmount = Number(element.value);
+        let fees = 10;
+        let feesAmount = fees * transferAmount * 0.01;
+        document.getElementById("transactionAmount").value = transferAmount + feesAmount;
+    }
 </script>
